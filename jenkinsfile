@@ -1,17 +1,19 @@
 pipeline {	
 	agent any	
 	tools {	    
-		maven 'maven’		
-		jdk 'jdk-17’	
+		maven 'maven'		
+		jdk 'jdk-17'	
 	}	
 	stages {        
 		stage('Clone'){			
-			steps {git url:'https://github.com/tuljeshrahul/authentication-service.git', branch:'main’}			}		
+			steps {git url:'https://github.com/tuljeshrahul/authentication-service.git', branch:'main'
+			}			
+		}		
 		stage('Build'){			
 			steps {bat "mvn clean install -DskipTests"}		
 		}		
 		stage('Test'){			
-			steps{bat "mvn test"}		}		
+			steps{bat "mvn test"}				
 		}
 		stage('Deploy') {			
 			steps { bat "docker build -t auth-image ."			    
